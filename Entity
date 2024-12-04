@@ -1,0 +1,35 @@
+package com.example.chartbackend.entity;
+
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+
+@Entity
+public class InterfaceData {
+    @Id
+    private String sendInterfaceId;
+    private Integer time0;
+    private Integer time1;
+    private Integer time2;
+    private Integer time3;
+    // ... 계속해서 time23까지 추가
+    private Integer time23;
+
+    // Getters and setters
+    public String getSendInterfaceId() {
+        return sendInterfaceId;
+    }
+
+    public void setSendInterfaceId(String sendInterfaceId) {
+        this.sendInterfaceId = sendInterfaceId;
+    }
+
+    public Integer getTime0() {
+        return time0;
+    }
+
+    public void setTime0(Integer time0) {
+        this.time0 = time0;
+    }
+
+    // ... 각 필드의 getter/setter 추가
+}
