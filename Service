@@ -1,0 +1,43 @@
+package com.example.chartbackend.service;
+
+import com.example.chartbackend.entity.InterfaceData;
+import com.example.chartbackend.repository.InterfaceDataRepository;
+import org.springframework.stereotype.Service;
+
+import java.util.*;
+
+@Service
+public class ChartDataService {
+
+    private final InterfaceDataRepository repository;
+
+    public ChartDataService(InterfaceDataRepository repository) {
+        this.repository = repository;
+    }
+
+    public Map<String, Object> getChartData() {
+        List<InterfaceData> dataList = repository.findAll();
+
+        Map<String, Object> response = new HashMap<>();
+        List<String> xAxis = new ArrayList<>();
+        List<List<Integer>> seriesData = new ArrayList<>();
+
+        for (InterfaceData data : dataList) {
+            xAxis.add(data.getSendInterfaceId()); // x축에 send_interface_id 추가
+
+            // 각 시리즈 데이터 생성
+            List<Integer> series = new ArrayList<>();
+            series.add(data.getTime0());
+            series.add(data.getTime1());
+            series.add(data.getTime2());
+            series.add(data.getTime3());
+            // ... 계속해서 time23까지 추가
+            series.add(data.getTime23());
+            seriesData.add(series);
+        }
+
+        response.put("xAxis", xAxis);
+        response.put("series", seriesData);
+        return response;
+    }
+}
