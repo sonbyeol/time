@@ -1,0 +1,43 @@
+@Repository
+public interface InterfaceDataRepository extends JpaRepository<InterfaceData, String> {
+
+    @Query("SELECT new com.example.chartbackend.dto.InterfaceDataDTO(" +
+           "d.sendInterfaceId, " +
+           "COUNT(CASE WHEN FUNCTION('hour', d.sendTime) = 0 THEN 1 END), " + // time0
+           "COUNT(CASE WHEN FUNCTION('hour', d.sendTime) = 1 THEN 1 END), " + // time1
+           "COUNT(CASE WHEN FUNCTION('hour', d.sendTime) = 2 THEN 1 END), " + // time2
+           "COUNT(CASE WHEN FUNCTION('hour', d.sendTime) = 3 THEN 1 END), " + // time3
+           "COUNT(CASE WHEN FUNCTION('hour', d.sendTime) = 4 THEN 1 END), " + // time4
+           // ...
+           "COUNT(CASE WHEN FUNCTION('hour', d.sendTime) = 23 THEN 1 END)) " + // time23
+           "FROM InterfaceData d GROUP BY d.sendInterfaceId")
+    List<InterfaceDataDTO> findInterfaceDataGroupedByTime(@Param("sendInterfaceId") String sendInterfaceId);
+}
+
+public class InterfaceDataDTO {
+
+    private String sendInterfaceId;
+    private Long time0;
+    private Long time1;
+    private Long time2;
+    private Long time3;
+    private Long time4;
+    private Long time5;
+    private Long time6;
+    private Long time7;
+    private Long time8;
+    private Long time9;
+    private Long time10;
+    private Long time11;
+    private Long time12;
+    private Long time13;
+    private Long time14;
+    private Long time15;
+    private Long time16;
+    private Long time17;
+    private Long time18;
+    private Long time19;
+    private Long time20;
+    private Long time21;
+    private Long time22;
+    private Long time23;
