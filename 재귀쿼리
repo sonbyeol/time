@@ -1,0 +1,20 @@
+WITH RECURSIVE hours AS (
+    SELECT 0 AS hour
+    UNION ALL
+    SELECT hour + 1
+    FROM hours
+    WHERE hour < 23
+)
+SELECT 
+    h.hour, 
+    COALESCE(SUM(s.sales_count), 0) AS sales_count -- 없는 시간은 0으로 대체
+FROM 
+    hours h
+LEFT JOIN 
+    sales s
+ON 
+    EXTRACT(HOUR FROM s.zoned_time) = h.hour -- zoned_time에서 시간만 추출하여 비교
+GROUP BY 
+    h.hour
+ORDER BY 
+    h.hour;
