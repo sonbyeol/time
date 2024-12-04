@@ -1,0 +1,8 @@
+{
+  "xAxis": ["a", "b", "c"],  // send_interface_id 값
+  "series": [
+    [1, 0, 0, 0, ..., 1],     // a의 time0 ~ time23
+    [0, 2, 3, 0, ..., 0],     // b의 time0 ~ time23
+    [4, 5, 0, 0, ..., 3]      // c의 time0 ~ time23
+  ]
+}
