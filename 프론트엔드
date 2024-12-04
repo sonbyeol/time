@@ -1,0 +1,31 @@
+import React, { useEffect, useState } from 'react';
+import { LineChart } from '@mui/x-charts/LineChart';
+
+export default function ChartWithDynamicData() {
+  const [chartData, setChartData] = useState({ xAxis: [], series: [] });
+
+  useEffect(() => {
+    fetch('http://localhost:8080/api/chart/data')
+      .then(response => response.json())
+      .then(data => {
+        const formattedSeries = data.series.map((s, index) => ({
+          data: s,
+          label: `Series ${index + 1}`, // 각 시리즈 레이블 설정
+        }));
+
+        setChartData({
+          xAxis: data.xAxis,
+          series: formattedSeries,
+        });
+      });
+  }, []);
+
+  return (
+    <LineChart
+      xAxis={[{ data: chartData.xAxis }]}
+      series={chartData.series}
+      height={300}
+      width={500}
+    />
+  );
+}
